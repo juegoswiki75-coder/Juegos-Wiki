@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juegos Wiki</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080d0b;color:#f2fff5;font-family:Arial,sans-serif}
+header{padding:28px 18px;text-align:center;background:#101a14;border-bottom:2px solid #39ff78}
+.logo{font-size:34px;font-weight:bold;color:#49ff83}
+header p{color:#c4d5ca;margin-bottom:0}
+main{max-width:850px;margin:auto;padding:20px}
+h2{color:#49ff83}
+input{width:100%;padding:14px;border-radius:10px;border:1px solid #39ff78;background:#101a14;color:white;font-size:16px}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
+.game{background:#111c15;border:1px solid #245b38;border-radius:12px;padding:17px}
+.game h3{color:#65ff91;margin-top:0}
+.status{color:#ffcf68;font-size:13px}
+.tagline{text-align:center;color:#b8c9bd;margin:22px 0}
+footer{text-align:center;padding:25px;color:#91a498;border-top:1px solid #245b38;margin-top:30px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">🎮 JUEGOS WIKI</div>
+<p>Tu aventura. Todos los secretos.</p>
+</header>
+<main>
+<p class="tagline">Guías, mapas, secretos y todo lo que necesitas para completar tus juegos favoritos.</p>
+<h2>🔎 Encuentra tu juego</h2>
+<input id="busqueda" type="search" placeholder="Escribe el nombre de un juego...">
+<div class="games" id="juegos"></div>
+<h2>🚀 Próximamente</h2>
+<p>Estamos preparando nuevos mapas, secretos y guías para ayudarte a conseguir el 100%.</p>
+</main>
+<footer>Juegos Wiki © 2026 · Tu aventura. Todos los secretos.</footer>
+<script>
+const lista=[
+"Grand Theft Auto V",
+"Grand Theft Auto: San Andreas",
+"Ghost of Yōtei",
+"Ghost of Tsushima",
+"The Last of Us Part I",
+"The Last of Us Part II",
+"Red Dead Redemption",
+"Red Dead Redemption 2",
+"Elden Ring",
+"Marvel’s Spider-Man 2"
+];
+const contenedor=document.getElementById("juegos");
+function mostrar(filtro=""){
+contenedor.innerHTML="";
+lista.filter(j=>j.toLowerCase().includes(filtro.toLowerCase())).forEach(j=>{
+const tarjeta=document.createElement("article");
+tarjeta.className="game";
+const titulo=document.createElement("h3");
+titulo.textContent="🎮 "+j;
+const estado=document.createElement("p");
+estado.className="status";
+estado.textContent="● En preparación";
+const descripcion=document.createElement("p");
+descripcion.textContent="Próximamente: mapas, misiones, coleccionables y secretos.";
+tarjeta.append(titulo,estado,descripcion);
+contenedor.appendChild(tarjeta);
+});
+}
+document.getElementById("busqueda").addEventListener("input",e=>mostrar(e.target.value));
+mostrar();
+</script>
+</body>
+</html>
