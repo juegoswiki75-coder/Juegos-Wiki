@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTA V | Juegos Wiki</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080d0b;color:#f2fff5;font-family:Arial,sans-serif}
+header{text-align:center;padding:24px 15px;background:#101a14;border-bottom:2px solid #39ff78}
+header a{color:#65ff91;text-decoration:none}
+h1{color:#49ff83;margin:12px 0}
+main{max-width:850px;margin:auto;padding:18px}
+.panel{background:#111c15;border:1px solid #245b38;border-radius:12px;padding:16px;margin:15px 0}
+h2{color:#65ff91}
+input{width:100%;padding:13px;border-radius:9px;border:1px solid #39ff78;background:#080d0b;color:white;font-size:16px}
+.item{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #26372b}
+.item input{width:19px;height:19px;flex-shrink:0;margin-top:2px;accent-color:#39ff78}
+.item label{line-height:1.4}
+small{color:#a9c0ae}
+#porcentaje{font-size:28px;color:#49ff83;font-weight:bold}
+.barra{height:12px;background:#26372b;border-radius:20px;overflow:hidden}
+#relleno{height:100%;width:0;background:#39ff78;transition:.2s}
+a.boton{display:inline-block;padding:10px 14px;background:#15351f;color:#8dffae;border-radius:8px;text-decoration:none}
+footer{text-align:center;color:#91a498;padding:25px}
+</style>
+</head>
+<body>
+<header>
+<a href="index.html">← Volver a Juegos Wiki</a>
+<h1>🎮 GRAND THEFT AUTO V</h1>
+<p>Tu aventura. Todos los secretos.</p>
+</header>
+<main>
+<section class="panel">
+<h2>🏆 Tu progreso</h2>
+<div id="porcentaje">0%</div>
+<div class="barra"><div id="relleno"></div></div>
+<small id="contador">0 de 0 objetivos marcados</small>
+</section>
+
+<section class="panel">
+<h2>🔎 Buscar objetivos</h2>
+<input id="buscar" type="search" placeholder="Buscar misiones, secretos...">
+<p><small>Marca las casillas conforme completes cada objetivo. El progreso se guarda en este navegador.</small></p>
+</section>
+
+<div id="listas"></div>
+
+<section class="panel">
+<h2>🗺️ Mapa de GTA V</h2>
+<p>Estamos preparando el mapa interactivo con marcadores para coleccionables, actividades, secretos y otros objetivos.</p>
+<p><small>Próximamente en Juegos Wiki.</small></p>
+</section>
+</main>
+<footer>Juegos Wiki · Guía de GTA V</footer>
+<script>
+const categorias=[
+{nombre:"📖 Misiones principales",items:["Completar las misiones de la historia"]},
+{nombre:"💎 Coleccionables",items:["Encontrar los objetos coleccionables","Completar los desafíos de coleccionables"]},
+{nombre:"⭐ Actividades y pasatiempos",items:["Completar actividades y pasatiempos","Completar desafíos disponibles"]},
+{nombre:"🔍 Secretos y exploración",items:["Descubrir lugares especiales","Explorar el mundo de Los Santos"]},
+{nombre:"🏅 Progreso general",items:["Revisar los objetivos pendientes","Comprobar el progreso hacia el 100%"]}
+];
+const contenedor=document.getElementById("listas");
+const claves=categorias.flatMap((c,i)=>c.items.map((x,j)=>"gtav-"+i+"-"+j));
+function actualizar(){
+let hechos=claves.filter(k=>localStorage.getItem(k)==="1").length;
+let total=claves.length;
+let p=Math.round(hechos/total*100);
+document.getElementById("porcentaje").textContent=p+"%";
+document.getElementById("relleno").style.width=p+"%";
+document.getElementById("contador").textContent=hechos+" de "+total+" objetivos marcados";
+}
+function mostrar(filtro=""){
+contenedor.innerHTML="";
+categorias.forEach((cat,i)=>{
+let visible=cat.items.filter(x=>x.toLowerCase().includes(filtro.toLowerCase()));
+if(!visible.length)return;
+let seccion=document.createElement("section");
+seccion.className="panel";
+let titulo=document.createElement("h2");
+titulo.textContent=cat.nombre;
+seccion.appendChild(titulo);
+cat.items.forEach((nombre,j)=>{
+if(!nombre.toLowerCase().includes(filtro.toLowerCase()))return;
+let fila=document.createElement("div");
+fila.className="item";
+let casilla=document.createElement("input");
+casilla.type="checkbox";
+casilla.checked=localStorage.getItem("gtav-"+i+"-"+j)==="1";
+casilla.id="objetivo-"+i+"-"+j;
+casilla.addEventListener("change",()=>{
+localStorage.setItem("gtav-"+i+"-"+j,casilla.checked?"1":"0");
+actualizar();
+});
+let etiqueta=document.createElement("label");
+etiqueta.htmlFor=casilla.id;
+etiqueta.textContent=nombre;
+fila.append(casilla,etiqueta);
+seccion.appendChild(fila);
+});
+contenedor.appendChild(seccion);
+});
+}
+document.getElementById("buscar").addEventListener("input",e=>mostrar(e.target.value));
+mostrar();
+actualizar();
+</script>
+</body>
+</html>
