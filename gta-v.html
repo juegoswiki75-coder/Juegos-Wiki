@@ -48,11 +48,34 @@ footer{text-align:center;color:#91a498;padding:25px}
 
 <div id="listas"></div>
 
+
 <section class="panel">
-<h2>🗺️ Mapa de GTA V</h2>
-<p>Estamos preparando el mapa interactivo con marcadores para coleccionables, actividades, secretos y otros objetivos.</p>
-<p><small>Próximamente en Juegos Wiki.</small></p>
+  <h2>🗺️ Mapa interactivo de GTA V</h2>
+  <p>Toca un marcador para consultar su ubicación.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0">
+    <button onclick="mostrarLugar('Coleccionable')">💎 Coleccionables</button>
+    <button onclick="mostrarLugar('Misión')">🎯 Misiones</button>
+    <button onclick="mostrarLugar('Secreto')">🔎 Secretos</button>
+  </div>
+
+  <div style="position:relative;background:#17251d;border:2px solid #35d07f;border-radius:12px;min-height:260px;overflow:hidden;padding:15px;background-image:linear-gradient(#35d07f22 1px,transparent 1px),linear-gradient(90deg,#35d07f22 1px,transparent 1px);background-size:25px 25px">
+    <button onclick="mostrarLugar('Coleccionable')" style="position:absolute;left:20%;top:25%">💎</button>
+    <button onclick="mostrarLugar('Misión')" style="position:absolute;left:65%;top:35%">🎯</button>
+    <button onclick="mostrarLugar('Secreto')" style="position:absolute;left:40%;top:70%">🔎</button>
+    <p style="color:white;text-align:center;margin-top:100px">LOS SANTOS · MAPA INICIAL</p>
+  </div>
+
+  <p id="detalleLugar">Selecciona un marcador para ver su categoría.</p>
 </section>
+
+<script>
+function mostrarLugar(tipo) {
+  document.getElementById("detalleLugar").textContent =
+    "Categoría: " + tipo + ". Este marcador es de demostración; falta añadir la ubicación real y su guía.";
+}
+</script>
+
 </main>
 <footer>Juegos Wiki · Guía de GTA V</footer>
 <script>
