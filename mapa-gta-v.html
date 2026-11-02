@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa GTA V | Juegos Wiki</title>
+<style>
+body {
+  margin: 0;
+  background: #080d0a;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+header {
+  padding: 18px;
+  text-align: center;
+  background: #101b13;
+  border-bottom: 2px solid #39ff75;
+}
+h1 { color: #39ff75; margin: 0; }
+main { padding: 15px; }
+button {
+  padding: 12px 20px;
+  margin: 5px;
+  border: 1px solid #39ff75;
+  border-radius: 8px;
+  background: #14251a;
+  color: white;
+  font-weight: bold;
+}
+button:focus, button:hover {
+  background: #226b3a;
+}
+#mapa {
+  height: 65vh;
+  min-height: 320px;
+  margin-top: 15px;
+  border: 2px solid #39ff75;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  box-sizing: border-box;
+  background: #17251b;
+}
+#mensaje { color: #b8ffc9; line-height: 1.6; }
+</style>
+</head>
+<body>
+<header>
+  <h1>JUEGOS WIKI</h1>
+  <p>Tu aventura. Todos los secretos.</p>
+</header>
+<main>
+  <h2>🗺️ Mapa de GTA V</h2>
+  <p>Los Santos y Blaine County</p>
+  <button onclick="cambiarMapa('Atlas')">Atlas</button>
+  <button onclick="cambiarMapa('Satélite')">Satélite</button>
+  <div id="mapa">
+    <div id="mensaje">
+      <h2>Mapa de GTA V</h2>
+      <p>Base del visor preparada.</p>
+      <p>Estamos preparando los mapas Atlas y Satélite.</p>
+    </div>
+  </div>
+</main>
+<script>
+function cambiarMapa(tipo) {
+  document.getElementById("mensaje").innerHTML =
+    "<h2>Vista " + tipo + "</h2>" +
+    "<p>Esta vista está pendiente de integrar.</p>";
+}
+</script>
+</body>
+</html>
