@@ -56,7 +56,7 @@ lista.filter(j=>j.toLowerCase().includes(filtro.toLowerCase())).forEach(j=>{
 const tarjeta=document.createElement("article");
 tarjeta.className="game";
 const titulo=document.createElement("h3");
-titulo.textContent="🎮 "+j;
+if(j==="Grand Theft Auto V"){const enlace=document.createElement("a");enlace.href="gta-v.html";enlace.textContent="🎮 "+j;enlace.style.color="inherit";titulo.appendChild(enlace);}else{titulo.textContent="🎮 "+j;}
 const estado=document.createElement("p");
 estado.className="status";
 estado.textContent="● En preparación";
